@@ -10,5 +10,8 @@
   {"sku":"CB-LAN-10M","name":"LAN Cable CAT6 10m","category":"Cable","price":120,"stock":40,"warranty_months":0,"tags":["สายแลน","cat6"]},
   {"sku":"CAM-1080P","name":"Webcam 1080p","category":"Accessory","price":790,"stock":9,"warranty_months":12,"tags":["เว็บแคม","เรียนออนไลน์"]},
   {"sku":"HS-USB","name":"USB Headset","category":"Audio","price":650,"stock":8,"warranty_months":12,"tags":["หูฟัง","ไมค์","usb"]},
-  {"sku":"UPS-650VA","name":"UPS 650VA","category":"Power","price":2190,"stock":3,"warranty_months":24,"tags":["ups","สำรองไฟ"]}
+  {"sku":"UPS-650VA","name":"UPS 650VA","category":"Power","price":2190,"stock":3,"warranty_months":24,"tags":["ups","สำรองไฟ"]},
+  {"sku":"RAH-1234","name":"CASE SKELETON Edition","category":"Case","price":1200,"stock":8,"warranty_months":18,"tags":["เคส","เคสคอม","case","case","computer case"]},
+  {"sku":"TEST","name":"ok ขึ้นละ","category":"Text","price":0,"stock":999,"warranty_months":0,"tags":["test","เทส","เทส","โหล"]},
+  {"sku":"RICE-007","name":"ข้าวหอมมะลิ 1 กิโลกรัม","category":"Text","price":35,"stock":999,"warranty_months":1,"tags":["rice","ข้าว","ของแถม","สวัสดี","ไร้สาย"]}
 ]
