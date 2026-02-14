@@ -81,37 +81,42 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen p-6 max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold">IT Shop Voice Q&A (Web Speech)</h1>
-      <p className="text-sm opacity-80 mt-2">
-        กดเริ่มแล้วพูด เช่น “มี SSD 1TB ไหม ราคาเท่าไหร่”
-      </p>
+    <div className="bg-img">
+      <div className="ml-44 mr-44 bg-opacity shadow-lg">
+        <main className="min-h-screen p-6 max-w-3xl mx-auto">
+        <h1 className="text-2xl font-bold">IT Shop Voice Q&A (Web Speech)</h1>
+        <p className="text-sm opacity-80 mt-2">
+          กดเริ่มแล้วพูด เช่น “มี SSD 1TB ไหม ราคาเท่าไหร่”
+        </p>
 
-      <div className="mt-6 flex gap-3">
-        {!isListening ? (
-          <button className="px-4 py-2 rounded bg-black text-white" onClick={start}>
-            เริ่มพูด
-          </button>
-        ) : (
-          <button className="px-4 py-2 rounded bg-red-600 text-white" onClick={stop}>
-            หยุด
-          </button>
-        )}
-        <div className="px-3 py-2 rounded border text-sm">{status}</div>
+        <div className="mt-6 flex gap-3">
+          {!isListening ? (
+            <button className="px-4 py-2 rounded bg-black text-white" onClick={start}>
+              เริ่มพูด
+            </button>
+          ) : (
+            <button className="px-4 py-2 rounded bg-red-600 text-black" onClick={stop}>
+              หยุด
+            </button>
+          )}
+          <div className="px-3 py-2 rounded border text-sm">{status}</div>
+        </div>
+
+        <section className="mt-8 space-y-4">
+          <div className="p-4 rounded border">
+            <div className="font-semibold">ข้อความที่ถอดเสียง</div>
+            <div className="mt-2 text-sm">{result.transcript ?? "-"}</div>
+          </div>
+
+          <div className="p-4 rounded border">
+            <div className="font-semibold">คำตอบ</div>
+            <div className="mt-2 text-sm">{result.answer ?? "-"}</div>
+            {result.error && <div className="mt-2 text-sm text-red-600">{result.error}</div>}
+          </div>
+        </section>
+      </main>
       </div>
+    </div>
 
-      <section className="mt-8 space-y-4">
-        <div className="p-4 rounded border">
-          <div className="font-semibold">ข้อความที่ถอดเสียง</div>
-          <div className="mt-2 text-sm">{result.transcript ?? "-"}</div>
-        </div>
-
-        <div className="p-4 rounded border">
-          <div className="font-semibold">คำตอบ</div>
-          <div className="mt-2 text-sm">{result.answer ?? "-"}</div>
-          {result.error && <div className="mt-2 text-sm text-red-600">{result.error}</div>}
-        </div>
-      </section>
-    </main>
   );
 }
