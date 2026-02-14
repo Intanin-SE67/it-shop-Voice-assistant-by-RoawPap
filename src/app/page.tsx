@@ -82,8 +82,8 @@ export default function Home() {
 
   return (
     <div className="bg-img">
-      <div className="ml-44 mr-44 bg-opacity shadow-lg">
-        <main className="min-h-screen p-6 max-w-3xl mx-auto">
+      <div className="ml-44 mr-44 bg-current/50 invert shadow-lg">
+        <main className="min-h-screen p-6 max-w-3xl mx-auto invert">
         <h1 className="text-2xl font-bold">IT Shop Voice Q&A (Web Speech)</h1>
         <p className="text-sm opacity-80 mt-2">
           กดเริ่มแล้วพูด เช่น “มี SSD 1TB ไหม ราคาเท่าไหร่”
