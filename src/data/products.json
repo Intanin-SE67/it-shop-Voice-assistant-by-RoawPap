@@ -13,5 +13,11 @@
   {"sku":"UPS-650VA","name":"UPS 650VA","category":"Power","price":2190,"stock":3,"warranty_months":24,"tags":["ups","สำรองไฟ"]},
   {"sku":"RAH-1234","name":"CASE SKELETON Edition","category":"Case","price":1200,"stock":8,"warranty_months":18,"tags":["เคส","เคสคอม","case","case","computer case"]},
   {"sku":"TEST","name":"ok ขึ้นละ","category":"Text","price":0,"stock":999,"warranty_months":0,"tags":["test","เทส","เทส","โหล"]},
-  {"sku":"RICE-007","name":"ข้าวหอมมะลิ 1 กิโลกรัม","category":"Text","price":35,"stock":999,"warranty_months":1,"tags":["rice","ข้าว","ของแถม","สวัสดี","ไร้สาย"]}
+  {"sku":"RICE-007","name":"ข้าวหอมมะลิ 1 กิโลกรัม","category":"Text","price":35,"stock":999,"warranty_months":1,"tags":["rice","ข้าว","ของแถม","สวัสดี","ไร้สาย"]},
+  {"sku":"COFFEE-001","name":"กาแฟสำเร็จรูป 3 in 1","category":"Text","price":15,"stock":999,"warranty_months":0,"tags":["coffee","กาแฟ","ของแถม"]},
+  {"sku":"PB-10K-009","name":"Power Bank 10000mAh","category":"Power","price":450,"stock":9,"warranty_months":12,"tags":["powerbank","แบตสำรอง"]},
+  {"sku":"MB-INTEL-COREI5","name":"Intel Core i5 12400F","category":"CPU","price":4500,"stock":5,"warranty_months":36,"tags":["cpu","intel","core i5"]},
+  {"sku":"MB-AMD-RYZEN5","name":"AMD Ryzen 5 5600X","category":"CPU","price":5500,"stock":4,"warranty_months":36,"tags":["cpu","amd","ryzen 5"]},
+  {"sku":"GPU-NVIDIA-3060","name":"NVIDIA GeForce RTX 3060","category":"GPU","price":12000,"stock":2,"warranty_months":36,"tags":["gpu","nvidia","rtx 3060"]},
+  {"sku":"GPU-AMD-6600XT","name":"AMD Radeon RX 6600 XT","category":"GPU","price":11000,"stock":3,"warranty_months":36,"tags":["gpu","amd","rx 6600 xt"]}
 ]
