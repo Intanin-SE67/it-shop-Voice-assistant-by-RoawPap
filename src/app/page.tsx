@@ -26,6 +26,9 @@ export default function Home() {
     window.speechSynthesis.cancel(); 
     window.speechSynthesis.speak(utter);
   }
+  function stopvoice() {
+    window.speechSynthesis.cancel();
+  }
   useEffect(() => {
     // รองรับ Chrome: webkitSpeechRecognition
     const SpeechRecognition =
@@ -114,6 +117,9 @@ export default function Home() {
             </button>
           )}
           <div className="px-3 py-2 rounded border text-sm">{status}</div>
+          <button className="px-4 py-2 rounded bg-black text-white" onClick={stopvoice}>
+            หยุดเสียง
+          </button>
         </div>
 
         <section className="mt-8 space-y-4">
