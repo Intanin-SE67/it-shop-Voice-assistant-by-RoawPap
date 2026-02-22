@@ -1,5 +1,5 @@
 [
-  {"sku":"KB-LOGI-K120","name":"Logitech K120 Keyboard","category":"Keyboard","price":399,"stock":18,"warranty_months":12,"tags":["คีย์บอร์ด","usb","ทำงาน"]},
+  {"sku":"KB-LOGI-K120","name":"Logitech K120 Keyboard","category":"Keyboard","price":399,"stock":18,"warranty_months":12,"tags":["คีย์บอร์ด","usb","ทำงาน"], "images":["./product-images/1.png"]},
   {"sku":"MS-LOGI-M185","name":"Logitech M185 Mouse","category":"Mouse","price":349,"stock":25,"warranty_months":12,"tags":["เมาส์","ไร้สาย"]},
   {"sku":"HD-SSD-1TB","name":"SSD NVMe 1TB Gen3","category":"Storage","price":1890,"stock":7,"warranty_months":36,"tags":["ssd","nvme","1tb"]},
   {"sku":"HD-HDD-2TB","name":"HDD 2TB 3.5\"","category":"Storage","price":1650,"stock":5,"warranty_months":24,"tags":["hdd","2tb"]},
