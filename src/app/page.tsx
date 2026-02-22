@@ -133,6 +133,22 @@ export default function Home() {
             <div className="mt-2 text-sm">{result.answer ?? "-"}</div>
             {result.error && <div className="mt-2 text-sm text-red-600">{result.error}</div>}
           </div>
+          
+          {result.matches && result.matches.length > 0 && <div className="p-4 rounded border">
+                <div className="font-semibold mb-3">สินค้าที่พบ</div>
+                <div className="grid grid-cols-2 gap-4"> {result.matches.map((item: any, index: number) => 
+                    <div key={index} className="border rounded p-3 text-center bg-white text-black">
+                      <img src={item.images} alt={item.name} className="w-full h-40 object-contain mb-2"/>
+                      <div className="font-medium">
+                        {item.name}
+                      </div>
+                      <div className="text-sm">
+                        ราคา {item.price} บาท
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>}
         </section>
       </main>
       </div>
