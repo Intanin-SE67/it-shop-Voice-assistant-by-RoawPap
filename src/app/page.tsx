@@ -108,7 +108,7 @@ export default function Home() {
 
         <div className="mt-6 flex gap-3">
           {!isListening ? (
-            <button className="px-4 py-2 rounded bg-black text-white" onClick={start}>
+            <button className="px-4 py-2 rounded bg-black text-white" onClick={() => {  stopvoice(); start(); }}>
               เริ่มพูด
             </button>
           ) : (
