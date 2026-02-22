@@ -15,7 +15,17 @@ export default function Home() {
   const [result, setResult] = useState<ApiResult>({});
 
   const recognitionRef = useRef<any>(null);
+  function speak(text: string) {
+    if (!("speechSynthesis" in window)) return;
 
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "th-TH"; 
+    utter.rate = 1; 
+    utter.pitch = 1;
+
+    window.speechSynthesis.cancel(); 
+    window.speechSynthesis.speak(utter);
+  }
   useEffect(() => {
     // รองรับ Chrome: webkitSpeechRecognition
     const SpeechRecognition =
@@ -62,6 +72,10 @@ export default function Home() {
       const data: ApiResult = await resp.json();
       setResult(data);
       setStatus(data.error ? "เกิดข้อผิดพลาด" : "เสร็จสิ้น");
+
+      if (data.answer) {
+        speak(data.answer);
+      }
     };
 
     recognitionRef.current = rec;
