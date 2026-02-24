@@ -12,5 +12,9 @@
   {"sku":"DB-EXPLODINGK-002","name":"Exploding Kittens Good vs Evil","category":"Card Game","price":850,"stock":12,"warranty_months":3,"tags":["exploding kittens","แมวระเบิด","card game","party","fun"],"images":["./product-images/exploding-kittens-good-vs-evil.png"]},
   {"sku":"DB-EXPLODINGK-003","name":"EXPLODING KITTENS NOT SAFE FOR WORK","category":"Card Game","price":950,"stock":10,"warranty_months":3,"tags":["exploding kittens","แมวระเบิด","card game","party","fun"],"images":["./product-images/exploding-kittens-not-safe-for-work.png"]},
   {"sku":"DB-EXPLODINGK-004","name":"Exploding Kittens Recipes for Disaster ","category":"Card Game ","price ":1050, "stock ":8, "warranty_months ":3, "tags ":["exploding kittens", "แมวระเบิด", "card game", "party", "fun"], "images ":["./product-images/exploding-kittens-recipes-for-disaster.png"]},
-  {"sku":"DB-CONNECT4-001","name":"Connect 4","category":"Board Game","price":800,"stock":12,"warranty_months":3,"tags":["connect 4","เกมเรียง4","strategy game","family"],"images":["./product-images/connect-4.png"]}
+  {"sku":"DB-CONNECT4-001","name":"Connect 4","category":"Board Game","price":800,"stock":12,"warranty_months":3,"tags":["connect 4","เกมเรียง4","strategy game","family"],"images":["./product-images/connect-4.png"]},
+  {"sku":"DB-CHESS-001","name":"Chess","category":"Board Game","price":240,"stock":12,"warranty_months":3,"tags":["chess","เกมหมากรุก","strategy game","family"],"images":["./product-images/chess.png"]},
+  {"sku":"DB-CHECKERS-001","name":"Checkers","category":"Board Game","price":200,"stock":12,"warranty_months":3,"tags":["checkers","เกมหมากคว่ำ","หมากฮอส","strategy game","family"],"images":["./product-images/checkers.png"]}
+
+
 ]
