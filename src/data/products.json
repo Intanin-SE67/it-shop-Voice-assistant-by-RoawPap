@@ -1,7 +1,7 @@
 [
-  {"sku":"DB-UNO-001","name":"UNO Classic","category":"Card Game","price":250,"stock":25,"warranty_months":3,"tags":["อูโน่","UNO","card","card game"], "images":["./product-images/uno/uno-classic.png"]},
-  {"sku":"DB-UNO-002","name":"UNO Flip","category":"Card Game","price":320,"stock":20,"warranty_months":3,"tags":["UNO","อูโน่","card game","party"], "images":["./product-images/uno/uno-flip.png"]},
-  {"sku":"DB-UNO-003","name":"UNO Attack","category":"Card Game","price":400,"stock":15,"warranty_months":3,"tags":["UNO","อูโน่","card game","fun"], "images":["./product-images/uno/uno-attack.png"]},
+  {"sku":"DB-UNO-001","name":"UNO Classic","category":"Card Game","price":250,"stock":25,"warranty_months":3,"tags":["อูโน่","UNO","card","card game"], "images":["./product-images/uno/classic.png"]},
+  {"sku":"DB-UNO-002","name":"UNO Flip","category":"Card Game","price":320,"stock":20,"warranty_months":3,"tags":["UNO","อูโน่","card game","party"], "images":["./product-images/uno/flip.png"]},
+  {"sku":"DB-UNO-003","name":"UNO Attack","category":"Card Game","price":400,"stock":15,"warranty_months":3,"tags":["UNO","อูโน่","card game","fun"], "images":["./product-images/uno/attack.png"]},
   {"sku":"DB-DIXIT-001","name":"Dixit","category":"Board Game","price":1200,"stock":15,"warranty_months":3,"tags":["dixit","ดิกซิท","imagination","party game","family"], "images":["./product-images/dixit.png"]},
   {"sku":"DB-COUP-001","name":"Coup","category":"Card Game","price":550,"stock":18,"warranty_months":3,"tags":["coup","เกมโค่นอำนาจ","bluff","card game","party"], "images":["./product-images/coup.png"]},
   {"sku":"DB-CATAN-001","name":"Catan","category":"Board Game","price":1800,"stock":10,"warranty_months":3,"tags":["catan","คาทาน","strategy","family board game"], "images":["./product-images/catan.png"]},
