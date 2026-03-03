@@ -11,77 +11,86 @@ type ApiResult = {
 
 export default function Home() {
   const [isListening, setIsListening] = useState(false);
-  const [status, setStatus] = useState("เตรียมพร้อม...");
+  const [status, setStatus] = useState("พร้อมพูด");
   const [result, setResult] = useState<ApiResult>({});
+  const [inputText, setInputText] = useState(""); //การพิมพ์
 
   const recognitionRef = useRef<any>(null);
-
   function speak(text: string) {
     if (!("speechSynthesis" in window)) return;
+
     const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = "th-TH";
-    utter.rate = 1;
-    window.speechSynthesis.cancel();
+    utter.lang = "th-TH"; 
+    utter.rate = 1; 
+    utter.pitch = 1;
+
+    window.speechSynthesis.cancel(); 
     window.speechSynthesis.speak(utter);
   }
-
   function stopvoice() {
     window.speechSynthesis.cancel();
   }
+  async function sendText(text: string) {
+    if (!text.trim()) return;
 
+    setStatus("กำลังส่งไปถามระบบ...");
+    setResult({ transcript: text });
+
+    const resp = await fetch("/api/voice", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text }),
+    });
+
+    const data: ApiResult = await resp.json();
+    setResult(data);
+    setStatus(data.error ? "เกิดข้อผิดพลาด" : "เสร็จสิ้น");
+
+    if (data.answer) {
+      speak(data.answer);
+    }
+  }
+
+  // --------- เกี่ยวกับการพิมพ์ -------------------------------
   useEffect(() => {
+    // รองรับ Chrome: webkitSpeechRecognition
     const SpeechRecognition =
       (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-      setStatus("เบราว์เซอร์ไม่รองรับ Web Speech API");
+      setStatus("เบราว์เซอร์นี้ไม่รองรับ Web Speech API (แนะนำ Chrome เท่านั้น)");
       return;
     }
-
+  // -------------------------------------------------------
     const rec = new SpeechRecognition();
     rec.lang = "th-TH";
-    rec.interimResults = false;
+    rec.interimResults = false; // เอาเฉพาะผลสุดท้าย
     rec.maxAlternatives = 1;
 
     rec.onstart = () => {
       setIsListening(true);
-      setStatus("กำลังฟังเสียงของคุณ...");
+      setStatus("กำลังฟัง... พูดคำถามได้เลย");
     };
 
     rec.onend = () => {
       setIsListening(false);
-      setStatus("รอรับคำสั่งต่อไป...");
+      setStatus("หยุดฟังแล้ว");
     };
 
     rec.onerror = (e: any) => {
       setIsListening(false);
-      setStatus(`เกิดข้อผิดพลาด: ${e?.error}`);
+      setStatus(`เกิดข้อผิดพลาด: ${e?.error || "unknown"}`);
+      setResult({ error: e?.error || "speech error" });
     };
-
+//---------- แก้ไข ---------------
     rec.onresult = async (event: any) => {
-      const transcript = event.results?.[0]?.[0]?.transcript || "";
-      setStatus("กำลังวิเคราะห์คำถาม...");
-      setResult({ transcript });
-
-      try {
-        const resp = await fetch("/api/voice", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text: transcript }),
-        });
-        const data: ApiResult = await resp.json();
-        setResult(data);
-        setStatus(data.error ? "เกิดข้อผิดพลาด" : "ค้นหาเสร็จสิ้น");
-        if (data.answer) speak(data.answer);
-      } catch (err) {
-        setStatus("เชื่อมต่อเซิร์ฟเวอร์ไม่ได้");
-      }
-    };
-
+  const transcript = event.results?.[0]?.[0]?.transcript || "";
+  await sendText(transcript);
+}; // -----------------------------------------------
     recognitionRef.current = rec;
   }, []);
-
-  const handleStart = () => {
+  
+    const handleStart = () => {
     stopvoice();
     setResult({});
     try {
@@ -89,8 +98,21 @@ export default function Home() {
     } catch (e) {}
   };
 
+  function start() {
+    setResult({});
+    try {
+      recognitionRef.current?.start();
+    } catch {
+      // บางครั้ง start ซ้ำเร็วเกิน จะ throw
+    }
+  }
+
+  function stop() {
+    recognitionRef.current?.stop();
+  }
+
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sansbg-img bg-img">
+    <div className="min-h-screen font-sansbg-img bg-img">
       {/* Header Section */}
       <header className="text-white py-12 px-6 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight">
@@ -101,12 +123,37 @@ export default function Home() {
         </p>
       </header>
 
-      <div className="bg-current/80  h-screen mx-auto shadow-lg border border-current">
+      <div className="bg-current/80  h-screen mx-auto shadow-lg border border-current invert">
         <main className="max-w-4xl mx-auto -mt-8 cover px-4 pb-20 invert">
           {/* Control Panel */}
           <div className="bg-current rounded-2xl shadow-xl mt-20 p-6 mb-8 border border-current invert">
-            <div className="flex flex-col items-center gap-6">
-              
+            <div className="mt-4 flex gap-2">
+              <input
+                type="text"
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                placeholder="พิมพ์คำถาม เช่น มี UNO ไหม"
+                className="flex-1 px-3 fit py-2 rounded-2xl border invert shadow-lg"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    stopvoice();
+                    sendText(inputText);
+                    setInputText("");
+                  }
+                }}
+              />
+              <button
+                className="px-4 py-2 rounded-2xl bg-current/25 invert shadow-lg"
+                onClick={() => {
+                  stopvoice();
+                  sendText(inputText);
+                  setInputText("");
+                }}
+              >
+                ส่ง
+              </button>              
+              </div>
+            <div className="flex flex-col mt-6 items-center gap-6 invert">
               {/* Visual Listening Indicator */}
               <div className="relative">
                 {isListening && (
@@ -149,14 +196,14 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 invert">
             {/* Transcript & Answer */}
             <div className="md:col-span-1 space-y-4">
-              <div className="bg-current p-5 rounded-xl border border-current shadow-sm">
-                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">เสียงที่คุณพูด</h3>
-                <p className="text-slate-800 leading-relaxed">{result.transcript || "..."}</p>
+              <div className="bg-current/90 p-5 rounded-xl border border-current shadow-sm ">
+                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 invert">เสียงที่คุณพูด</h3>
+                <p className="text-slate-800 leading-relaxed invert">{result.transcript || "..."}</p>
               </div>
               
-              <div className="bg-indigo-50 p-5 rounded-xl border border-indigo-100 shadow-sm">
-                <h3 className="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2">AI ตอบกลับ</h3>
-                <p className="text-indigo-900 font-medium leading-relaxed">{result.answer || "รอฟังคำถามของคุณ..."}</p>
+              <div className="bg-current/90 p-5 rounded-xl border border-current shadow-sm ">
+                <h3 className="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2 invert">AI ตอบกลับ</h3>
+                <p className="text-indigo-900 font-medium leading-relaxed invert">{result.answer || "รอฟังคำถามของคุณ..."}</p>
                 {result.error && <p className="text-red-500 text-xs mt-2 italic">{result.error}</p>}
               </div>
             </div>
@@ -164,6 +211,7 @@ export default function Home() {
             {/* Product Matches */}
             <div className="md:col-span-2">
               <div className="bg-current p-5 rounded-xl border border-current shadow-sm min-h-[200px]">
+                <div className="invert">
                 <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">
                   สินค้าที่เกี่ยวข้อง ({result.matches?.length || 0})
                 </h3>
@@ -196,6 +244,7 @@ export default function Home() {
                     <p className="text-sm italic">ยังไม่มีข้อมูลสินค้าแสดง</p>
                   </div>
                 )}
+                </div>
               </div>
             </div>
           </div>
