@@ -128,13 +128,13 @@ export default function Home() {
           </button>
         </div>
           
-        <div className="mt-4 flex gap-2">
+        <div className="mt-4 flex invert gap-2">
             <input
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               placeholder="พิมพ์คำถาม เช่น มี UNO ไหม"
-              className="flex-1 px-3 py-2 rounded border text-black"
+              className="flex-1 px-3 py-2 rounded border invert shadow-lg"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   stopvoice();
@@ -144,7 +144,7 @@ export default function Home() {
               }}
             />
             <button
-              className="px-4 py-2 rounded bg-blue-600 text-white"
+              className="px-4 py-2 rounded bg-current/50 invert shadow-lg"
               onClick={() => {
                 stopvoice();
                 sendText(inputText);
