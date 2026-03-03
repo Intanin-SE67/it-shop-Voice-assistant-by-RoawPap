@@ -181,7 +181,7 @@ export default function Home() {
                 <div className={`text-sm font-medium px-4 py-1 rounded-full mb-2 ${isListening ? "bg-red-100 text-red-700" : "bg-slate-100 text-slate-600"}`}>
                   {status}
                 </div>
-                <p className="text-slate-500 text-sm italic">ลองพูดว่า: "มีแมวระเบิดไหม?" หรือ "แนะนำBoard Game หน่อย"</p>
+                <p className="text-slate-500 text-sm italic">ลองพูดว่า: "มีแมวระเบิดไหม?" หรือ "แนะนำCard Gameหน่อย"</p>
               </div>
 
               <div className="flex gap-2">
