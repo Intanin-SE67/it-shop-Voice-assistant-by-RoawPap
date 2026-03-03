@@ -123,7 +123,7 @@ export default function Home() {
         </p>
       </header>
 
-      <div className="bg-current/80  h-screen mx-auto shadow-lg border border-current invert shadow-slate-300">
+      <div className="bg-current/80 mx-auto shadow-lg border border-current invert shadow-slate-300">
         <main className="max-w-4xl mx-auto -mt-8 cover px-4 pb-20 invert">
           {/* Control Panel */}
           <div className="bg-current rounded-2xl shadow-xl mt-20 p-6 mb-8 border border-current invert">
