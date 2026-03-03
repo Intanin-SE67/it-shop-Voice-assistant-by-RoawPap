@@ -13,6 +13,7 @@ export default function Home() {
   const [isListening, setIsListening] = useState(false);
   const [status, setStatus] = useState("พร้อมพูด");
   const [result, setResult] = useState<ApiResult>({});
+  const [inputText, setInputText] = useState(""); //การพิมพ์
 
   const recognitionRef = useRef<any>(null);
   function speak(text: string) {
@@ -29,6 +30,28 @@ export default function Home() {
   function stopvoice() {
     window.speechSynthesis.cancel();
   }
+  async function sendText(text: string) {
+    if (!text.trim()) return;
+
+    setStatus("กำลังส่งไปถามระบบ...");
+    setResult({ transcript: text });
+
+    const resp = await fetch("/api/voice", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text }),
+    });
+
+    const data: ApiResult = await resp.json();
+    setResult(data);
+    setStatus(data.error ? "เกิดข้อผิดพลาด" : "เสร็จสิ้น");
+
+    if (data.answer) {
+      speak(data.answer);
+    }
+  }
+
+  // --------- เกี่ยวกับการพิมพ์ -------------------------------
   useEffect(() => {
     // รองรับ Chrome: webkitSpeechRecognition
     const SpeechRecognition =
@@ -38,7 +61,7 @@ export default function Home() {
       setStatus("เบราว์เซอร์นี้ไม่รองรับ Web Speech API (แนะนำ Chrome เท่านั้น)");
       return;
     }
-
+  // -------------------------------------------------------
     const rec = new SpeechRecognition();
     rec.lang = "th-TH";
     rec.interimResults = false; // เอาเฉพาะผลสุดท้าย
@@ -59,28 +82,11 @@ export default function Home() {
       setStatus(`เกิดข้อผิดพลาด: ${e?.error || "unknown"}`);
       setResult({ error: e?.error || "speech error" });
     };
-
+//---------- แก้ไข ---------------
     rec.onresult = async (event: any) => {
-      const transcript = event.results?.[0]?.[0]?.transcript || "";
-      setStatus("ได้ข้อความแล้ว กำลังส่งไปถามระบบ...");
-      setResult({ transcript });
-
-      // ส่ง transcript ไป server (ไม่ส่งไฟล์เสียงแล้ว)
-      const resp = await fetch("/api/voice", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: transcript }),
-      });
-
-      const data: ApiResult = await resp.json();
-      setResult(data);
-      setStatus(data.error ? "เกิดข้อผิดพลาด" : "เสร็จสิ้น");
-
-      if (data.answer) {
-        speak(data.answer);
-      }
-    };
-
+  const transcript = event.results?.[0]?.[0]?.transcript || "";
+  await sendText(transcript);
+}; // -----------------------------------------------
     recognitionRef.current = rec;
   }, []);
 
@@ -121,6 +127,34 @@ export default function Home() {
             หยุดเสียง
           </button>
         </div>
+          
+        <div className="mt-4 flex gap-2">
+            <input
+              type="text"
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              placeholder="พิมพ์คำถาม เช่น มี UNO ไหม"
+              className="flex-1 px-3 py-2 rounded border text-black"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  stopvoice();
+                  sendText(inputText);
+                  setInputText("");
+                }
+              }}
+            />
+            <button
+              className="px-4 py-2 rounded bg-blue-600 text-white"
+              onClick={() => {
+                stopvoice();
+                sendText(inputText);
+                setInputText("");
+              }}
+            >
+              ส่ง
+            </button>
+          </div>
+          
 
         <section className="mt-8 space-y-4">
           <div className="p-4 rounded border">
