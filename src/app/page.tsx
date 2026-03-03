@@ -132,7 +132,7 @@ export default function Home() {
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                placeholder="พิมพ์คำถาม เช่น มี UNO ไหม"
+                placeholder="พิมพ์ชื่อสินค้า เช่น UNO"
                 className="flex-1 px-3 fit py-2 rounded-2xl border invert shadow-lg"
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
@@ -181,7 +181,7 @@ export default function Home() {
                 <div className={`text-sm font-medium px-4 py-1 rounded-full mb-2 ${isListening ? "bg-red-100 text-red-700" : "bg-slate-100 text-slate-600"}`}>
                   {status}
                 </div>
-                <p className="text-slate-500 text-sm italic">ลองพูดว่า: "มีเกมเศรษฐีไหม?" หรือ "แนะนำบอร์ดเกมงบ 500 หน่อย"</p>
+                <p className="text-slate-500 text-sm italic">ลองพูดว่า: "มีแมวระเบิดไหม?" หรือ "แนะนำBoard Game หน่อย"</p>
               </div>
 
               <div className="flex gap-2">
